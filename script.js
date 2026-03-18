@@ -1,23 +1,20 @@
 function formulario() {
-	const selecao = document.querySelector(".formulario_selecao")
+	const selecionar = document.querySelector(".formulario_selecionar")
 	const adicionar = document.querySelector(".botao_adicionar")
-	const containerInputs = document.querySelector(".container_inputs")
-	const botoesRemover = document.querySelectorAll(".botao_remover")
+	const container = document.querySelector(".inputs_container")
 	adicionar.addEventListener("click", () => {
-		const inputs = document.querySelectorAll(".container_" + selecao.value)
+		const inputs = document.querySelectorAll(".input_" + selecionar.value)
 		inputs.forEach(input => {
 			if (input.classList.contains("oculto")) {
 				input.classList.remove("oculto")
-				containerInputs.appendChild(input)
+				container.appendChild(input)
 			}
 		})
 	})
+	const botoesRemover = document.querySelectorAll(".botao_remover")
 	botoesRemover.forEach(remover => {
 		remover.addEventListener("click", () => {
-			const inputs = document.querySelectorAll(".container_" + selecao.value)
-			inputs.forEach(input => {
-				input.classList.add("oculto")
-			})
+			remover.parentElement.classList.add("oculto")
 		})
 	})
 }
