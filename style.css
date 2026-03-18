@@ -8,26 +8,35 @@ body {
 .input_nome {
 	margin: 0 0 1rem 0;
 }
-.container_selecao,
-.container_email,
-.container_celular,
-.container_endereco {
+.formulario_selecao {
 	display: flex;
 	margin: 0 0 1rem 0;
 	gap: 1rem;
-	align-items: center;
 }
-.botao_adicionar,
-.botao_enviar {
+.botao_adicionar {
 	font-weight: bold;
 }
+.input_email,
+.input_celular,
+.input_endereco {
+	display: flex;
+	gap: 1rem;
+}
+.inputs_container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin: 0 0 1rem 0;
+}
 .botao_remover {
+	align-self: center;
 	border-radius: 50%;
 	font-weight: bold;
 }
+.botao_enviar {
+	font-weight: bold;
+	align-self: end
+}
 .oculto {
 	display: none;
-}
-.botao_enviar {
-	align-self: end;
 }
