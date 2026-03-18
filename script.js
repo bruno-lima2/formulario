@@ -13,10 +13,12 @@ function formulario() {
 		})
 	})
 	botoesRemover.forEach(remover => {
-	remover.addEventListener("click", () => {
-		const container = remover.parentElement
-		container.classList.add("oculto")
+		remover.addEventListener("click", () => {
+			const inputs = document.querySelectorAll(".container_" + selecao.value)
+			inputs.forEach(input => {
+				input.classList.add("oculto")
+			})
+		})
 	})
-})
 }
 formulario()
