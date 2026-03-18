@@ -1,0 +1,33 @@
+body {
+	margin: 2rem auto;
+	max-width: 500px;
+	padding: 0 1rem;
+	display: flex;
+	flex-direction: column;
+}
+.input_nome {
+	margin: 0 0 1rem 0;
+}
+.container_selecao,
+.container_email,
+.container_celular,
+.container_endereco {
+	display: flex;
+	margin: 0 0 1rem 0;
+	gap: 1rem;
+	align-items: center;
+}
+.botao_adicionar,
+.botao_enviar {
+	font-weight: bold;
+}
+.botao_remover {
+	border-radius: 50%;
+	font-weight: bold;
+}
+.oculto {
+	display: none;
+}
+.botao_enviar {
+	align-self: end;
+}

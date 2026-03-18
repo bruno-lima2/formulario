@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./style.css">
+	</head>
+	<body>
+		<input type="text" placeholder="Nome" class="form-control input_nome">
+		<div class="container_selecao">
+			<select class="form-select formulario_selecao">
+				<option value="" selected disabled>Tipo de contato</option>
+				<option value="email">Email</option>
+				<option value="celular">Celular</option>
+				<option value="endereco">Endereço</option>
+			</select>
+			<button class="btn btn-primary botao_adicionar">ADICIONAR</button>
+		</div>
+		<div class="container_inputs">
+			<div class="container_email oculto">
+				<input type="text" class="form-control" placeholder="Email">
+				<button class="btn btn-danger botao_remover">X</button>
+			</div>
+			<div class="container_celular oculto">
+				<input type="text" class="form-control" placeholder="Celular">
+				<button class="btn btn-danger botao_remover">X</button>
+			</div>
+			<div class="container_endereco oculto">
+				<textarea class="form-control" placeholder="Endereço"></textarea>
+				<button class="btn btn-danger botao_remover">X</button>
+			</div>
+		</div>
+		<button class="btn btn-success botao_enviar">ENVIAR</button>
+		<script src="./script.js"></script>
+	</body>
+</html>
