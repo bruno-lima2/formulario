@@ -3,39 +3,33 @@ body {
 	max-width: 500px;
 	padding: 0 1rem;
 	display: flex;
+	gap: 1rem;
 	flex-direction: column;
 }
-.input_nome {
-	margin: 0 0 1rem 0;
-}
-.formulario_selecao {
+.selecao {
 	display: flex;
-	margin: 0 0 1rem 0;
 	gap: 1rem;
 }
 .botao_adicionar {
 	font-weight: bold;
 }
-.input_email,
-.input_celular,
-.input_endereco {
+.botao_enviar {
+	align-self: end;
+	font-weight: bold;
+}
+.campo_selecionado {
 	display: flex;
 	gap: 1rem;
 }
-.inputs_container {
+.inputs {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-	margin: 0 0 1rem 0;
 }
 .botao_remover {
-	align-self: center;
 	border-radius: 50%;
 	font-weight: bold;
-}
-.botao_enviar {
-	font-weight: bold;
-	align-self: end
+	align-self: center;
 }
 .oculto {
 	display: none;
