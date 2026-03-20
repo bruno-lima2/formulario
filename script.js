@@ -18,7 +18,7 @@ function formulario() {
 			campo.appendChild(remover)
 			campos.appendChild(campo)
 			remover.addEventListener("click", () => {
-				campo.classList.add("oculto")
+				campo.remove()
 			})
 		} else if (campoSelecionado === "celular") {
 			const campo = document.createElement("div")
@@ -34,7 +34,7 @@ function formulario() {
 			campo.appendChild(remover)
 			campos.appendChild(campo)
 			remover.addEventListener("click", () => {
-				campo.classList.add("oculto")
+				campo.remove()
 			})			
 		} else if (campoSelecionado === "endereco") {
 			const campo = document.createElement("div")
@@ -49,7 +49,7 @@ function formulario() {
 			campo.appendChild(remover)
 			campos.appendChild(campo)	
 			remover.addEventListener("click", () => {
-				campo.classList.add("oculto")
+				campo.remove()
 			})		
 		}
 	})
