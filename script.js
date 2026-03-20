@@ -1,55 +1,56 @@
 function formulario() {
 	const selecionar = document.querySelector(".selecionar")
-	const adicionar = document.querySelector(".botao_adicionar")
-	const containerInputs = document.querySelector(".inputs")
+	const adicionar = document.querySelector(".adicionar")
+	const campos = document.querySelector(".campos")
 	adicionar.addEventListener("click", () => {
-		if (selecionar.value === "email") {
-			const campoSelecionado = document.createElement("div")
-			campoSelecionado.classList.add("campo_selecionado")
-			const campo = document.createElement("input")
-			campo.type = "text"
-			campo.classList.add("form-control")
-			campo.placeholder="Email"
+		const campoSelecionado = selecionar.value
+		if (campoSelecionado === "email") {
+			const campo = document.createElement("div")
+			campo.classList.add("campo")
+			const campoInput = document.createElement("input")
+			campoInput.type = "text"
+			campoInput.classList.add("form-control")
+			campoInput.placeholder = "Email"
 			const remover = document.createElement("button")
-			remover.classList.add("btn",  "btn-danger", "botao_remover")
+			remover.classList.add("btn", "btn-danger", "remover")
 			remover.textContent = "X"
-			campoSelecionado.appendChild(campo)
-			campoSelecionado.appendChild(remover)
-			containerInputs.appendChild(campoSelecionado)
+			campo.appendChild(campoInput)
+			campo.appendChild(remover)
+			campos.appendChild(campo)
 			remover.addEventListener("click", () => {
-				campoSelecionado.classList.add("oculto")
+				campo.classList.add("oculto")
 			})
-		} else if (selecionar.value === "celular") {
-			const campoSelecionado = document.createElement("div")
-			campoSelecionado.classList.add("campo_selecionado")
-			const campo = document.createElement("input")
-			campo.type = "text"
-			campo.classList.add("form-control")
-			campo.placeholder="Celular"
+		} else if (campoSelecionado === "celular") {
+			const campo = document.createElement("div")
+			campo.classList.add("campo")
+			const campoInput = document.createElement("input")
+			campoInput.type = "text"
+			campoInput.classList.add("form-control")
+			campoInput.placeholder = "Celular"
 			const remover = document.createElement("button")
-			remover.classList.add("btn",  "btn-danger", "botao_remover")
+			remover.classList.add("btn", "btn-danger", "remover")
 			remover.textContent = "X"
-			campoSelecionado.appendChild(campo)
-			campoSelecionado.appendChild(remover)
-			containerInputs.appendChild(campoSelecionado)
+			campo.appendChild(campoInput)
+			campo.appendChild(remover)
+			campos.appendChild(campo)
 			remover.addEventListener("click", () => {
-				campoSelecionado.classList.add("oculto")
-			})
-		} else if (selecionar.value === "endereco") {
-			const campoSelecionado = document.createElement("div")
-			campoSelecionado.classList.add("campo_selecionado")
-			const campo = document.createElement("textarea")
-			campo.classList.add("form-control")
-			campo.placeholder="Endereço"
+				campo.classList.add("oculto")
+			})			
+		} else if (campoSelecionado === "endereco") {
+			const campo = document.createElement("div")
+			campo.classList.add("campo")
+			const campoTextarea = document.createElement("textarea")
+			campoTextarea.classList.add("form-control")
+			campoTextarea.placeholder = "Endereço"
 			const remover = document.createElement("button")
-			remover.classList.add("btn",  "btn-danger", "botao_remover")
+			remover.classList.add("btn", "btn-danger", "remover")
 			remover.textContent = "X"
-			campoSelecionado.appendChild(campo)
-			campoSelecionado.appendChild(remover)
-			containerInputs.appendChild(campoSelecionado)
+			campo.appendChild(campoTextarea)
+			campo.appendChild(remover)
+			campos.appendChild(campo)	
 			remover.addEventListener("click", () => {
-				campoSelecionado.classList.add("oculto")
-			})
+				campo.classList.add("oculto")
+			})		
 		}
 	})
 }
