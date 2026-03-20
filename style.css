@@ -3,30 +3,30 @@ body {
 	max-width: 500px;
 	padding: 0 1rem;
 	display: flex;
-	gap: 1rem;
 	flex-direction: column;
+	gap: 1rem;
 }
 .selecao {
 	display: flex;
 	gap: 1rem;
 }
-.botao_adicionar {
+.adicionar {
 	font-weight: bold;
 }
-.botao_enviar {
+.enviar {
 	align-self: end;
 	font-weight: bold;
 }
-.campo_selecionado {
-	display: flex;
-	gap: 1rem;
-}
-.inputs {
+.campos {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 }
-.botao_remover {
+.campo {
+	display: flex;
+	gap: 1rem;
+}
+.remover {
 	border-radius: 50%;
 	font-weight: bold;
 	align-self: center;
