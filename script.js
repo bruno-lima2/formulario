@@ -42,3 +42,48 @@ adicionar.addEventListener("click", () => {
 		criarCampo()
 	}
 })
+
+/*const adicionar = document.querySelector(".adicionar")
+const selecionar = document.querySelector(".selecionar")
+const campos = document.querySelector(".campos")
+function criarCampo(tipo) {
+    const campo = document.createElement("div")
+    campo.classList.add("campo")
+    let input
+    if (tipo === "email" || tipo === "celular") {
+        input = document.createElement("input")
+        input.placeholder = tipo === "email" ? "Email" : "Celular"
+        input.classList.add("form-control")
+    } else if (tipo === "endereco") {
+        input = document.createElement("textarea")
+        input.placeholder = "Endereço"
+        input.classList.add("form-control")
+    }
+    campo.appendChild(input)
+    campo.appendChild(criarBotaoRemover(campo))
+    campos.appendChild(campo)
+    validarCampo(input, tipo)
+}
+function criarBotaoRemover(campo) {
+    const remover = document.createElement("button")
+    remover.textContent = "X"
+    remover.classList.add("btn", "btn-danger", "remover")
+    remover.addEventListener("click", () => {
+        campo.remove()
+    })
+    return remover
+}
+function validarCampo(input, tipo) {
+    if (tipo === "celular") {
+        input.addEventListener("blur", () => {
+            if (input.value.replace(/\D/g, "").length !== 11) {
+                input.value = ""
+            }
+        })
+    }
+}
+adicionar.addEventListener("click", () => {
+    if (selecionar.value) {
+        criarCampo(selecionar.value)
+    }
+})*/
