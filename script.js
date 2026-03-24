@@ -52,25 +52,20 @@ function validarCampos(campo) {
 	})
 }
 /*function mascaraCelular(campo) {
-    campo.addEventListener("input", () => {
-        let valor = campo.value.replace(/\D/g, ""); // mantém só números
-        if (valor.length > 11) valor = valor.slice(0, 11);
-        if (valor.length > 7) { 
-            // só aplica o traço quando há pelo menos 8 números
-            // (DDD + primeiro dígito + 4 números) => total mínimo 8
-            valor = `(${valor.slice(0,2)}) ${valor.slice(2,3)} ${valor.slice(3,7)}-${valor.slice(7)}`;
-        } else if (valor.length > 3) { 
-            // depois do primeiro dígito e alguns números
-            valor = `(${valor.slice(0,2)}) ${valor.slice(2,3)} ${valor.slice(3)}`;
-        } else if (valor.length > 2) { 
-            // logo após digitar o primeiro dígito do número
-            valor = `(${valor.slice(0,2)}) ${valor.slice(2)}`;
-        } else if (valor.length > 0) { 
-            // enquanto só está digitando o DDD
-            valor = `(${valor}`;
-        }
-        campo.value = valor;
-    });
+	campo.addEventListener("input", () => {
+		let valor = campo.value.replace(/\D/g, "").slice(0, 11)
+		let numeros = valor
+		if (valor.length > 0) {
+			numeros = "(" + valor.slice(0, 2)
+		} if (valor.length > 2) {
+			numeros = "(" + valor.slice(0, 2) + ") " + valor.slice(2, 3)
+		} if (valor.length > 3) {
+			numeros = "(" + valor.slice(0, 2) + ") " + valor.slice(2, 3) + " " + valor.slice(3, 7)
+		} if (valor.length > 7) {
+			numeros = "(" + valor.slice(0, 2) + ") " + valor.slice(2, 3) + " " + valor.slice(3, 7) + "-" + valor.slice(7)
+		} 
+		campo.value = numeros
+	})
 }*/
 adicionar.addEventListener("click", () => {
 	if (selecionar.value) {
