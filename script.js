@@ -21,7 +21,7 @@ function criarCampo() {
 		}
 		campo.appendChild(campoInput)
 		validarCampos(campoInput)
-		mascara(campoInput)
+		//mascara(campoInput)
 	}
 	botaoRemover(campo)
 }
@@ -57,7 +57,7 @@ function validarCampos(campo) {
 		}
 	})
 }
-function mascara(campo) {
+/*function mascara(campo) {
 	if (campo.placeholder === "Celular") {
 		campo.addEventListener("input", () => {
 			let valores = campo.value
@@ -74,7 +74,7 @@ function mascara(campo) {
 			campo.value = numeros
 		})
 	}
-}
+}*/
 adicionar.addEventListener("click", () => {
 	if (selecionar.value) {
 		criarCampo()
