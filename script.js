@@ -1,8 +1,8 @@
+const selecionar = document.querySelector(".selecionar");
 const adicionar = document.querySelector(".adicionar")
-const selecionar = document.querySelector(".selecionar")
-const campos = document.querySelector(".campos")
+const campos = document.querySelector(".campos");
 function criarCampo() {
-	const campo = document.createElement("div")
+	const campo = document.createElement("div");
 	campo.classList.add("campo")
 	campos.appendChild(campo)
 	if (selecionar.value === "endereco") {
@@ -16,57 +16,65 @@ function criarCampo() {
 		campoInput.classList.add("form-control")
 		if (selecionar.value === "email") {
 			campoInput.placeholder = "Email"
-			validarCampos(campoInput)
-		} else if (selecionar.value === "celular") {
+		} else {
 			campoInput.placeholder = "Celular"
-			validarCampos(campoInput)
-			//mascaraCelular(campoInput)
 		}
 		campo.appendChild(campoInput)
+		validarCampos(campoInput)
+		mascara(campoInput)
 	}
-	criarBotao(campo)
+	botaoRemover(campo)
 }
-function criarBotao(campo) {
+function botaoRemover(campo) {
 	const remover = document.createElement("button")
-	remover.textContent = "X"
 	remover.classList.add("btn", "btn-danger", "remover")
+	remover.textContent = "X"
 	remover.addEventListener("click", () => {
 		campo.remove()
 	})
 	campo.appendChild(remover)
 }
 function validarCampos(campo) {
+	campo.addEventListener("input", () => {
+		if (campo.placeholder === "Celular") {
+			campo.value = campo.value.replace(/\D/g, "").slice(0, 11)
+		}
+	})
 	campo.addEventListener("blur", () => {
-		if (!campo.value) {
+		if (campo.value === "") {
 			campo.classList.add("is-invalid")
-		} else {
+		}
+		else {
 			campo.classList.remove("is-invalid")
 		}
 		if (campo.placeholder === "Celular") {
-			if (campo.value.replace(/\D/g, "").length !== 11) {
+			if (campo.value.replace(/\D/g, "").slice(0, 11).length < 11) {
 				campo.classList.add("is-invalid")
-			} else {
+			}
+			else {
 				campo.classList.remove("is-invalid")
 			}
 		}
 	})
 }
-/*function mascaraCelular(campo) {
-	campo.addEventListener("input", () => {
-		let valor = campo.value.replace(/\D/g, "").slice(0, 11)
-		let numeros = valor
-		if (valor.length > 0) {
-			numeros = "(" + valor.slice(0, 2)
-		} if (valor.length > 2) {
-			numeros = "(" + valor.slice(0, 2) + ") " + valor.slice(2, 3)
-		} if (valor.length > 3) {
-			numeros = "(" + valor.slice(0, 2) + ") " + valor.slice(2, 3) + " " + valor.slice(3, 7)
-		} if (valor.length > 7) {
-			numeros = "(" + valor.slice(0, 2) + ") " + valor.slice(2, 3) + " " + valor.slice(3, 7) + "-" + valor.slice(7)
-		} 
-		campo.value = numeros
-	})
-}*/
+function mascara(campo) {
+	if (campo.placeholder === "Celular") {
+		campo.addEventListener("input", () => {
+			let valores = campo.value
+			let numeros = valores
+			if (valores.length > 0) {
+				numeros = "(" + valores.slice(0, 2)
+			} if (valores.length > 2) {
+				numeros = "(" + valores.slice(0, 2) + ") " + valores.slice(2, 3)
+			} if (valores.length > 3) {
+				numeros = "(" + valores.slice(0, 2) + ") " + valores.slice(2, 3) + " " + valores.slice(3, 7)
+			} if (valores.length > 7) {
+				numeros = "(" + valores.slice(0, 2) + ") " + valores.slice(2, 3) + " " + valores.slice(3, 7) + "-" + valores.slice(7, 11)
+			}
+			campo.value = numeros
+		})
+	}
+}
 adicionar.addEventListener("click", () => {
 	if (selecionar.value) {
 		criarCampo()
