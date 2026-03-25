@@ -58,22 +58,22 @@ function validarCampos(campo) {
 	})
 }
 /*function mascara(campo) {
-	if (campo.placeholder === "Celular") {
-		campo.addEventListener("input", () => {
+	campo.addEventListener("input", () => {
+		if (campo.placeholder === "Celular") {
 			let valores = campo.value
 			let numeros = valores
 			if (valores.length > 0) {
-				numeros = "(" + valores.slice(0, 2)
+				numeros = `(${valores.slice(0, 2)}`
 			} if (valores.length > 2) {
-				numeros = "(" + valores.slice(0, 2) + ") " + valores.slice(2, 3)
+				numeros = `(${valores.slice(0, 2)}) ${valores.slice(2, 3)}`
 			} if (valores.length > 3) {
-				numeros = "(" + valores.slice(0, 2) + ") " + valores.slice(2, 3) + " " + valores.slice(3, 7)
+				numeros = `(${valores.slice(0, 2)}) ${valores.slice(2, 3)} ${valores.slice(3, 7)}`
 			} if (valores.length > 7) {
-				numeros = "(" + valores.slice(0, 2) + ") " + valores.slice(2, 3) + " " + valores.slice(3, 7) + "-" + valores.slice(7, 11)
+				numeros = `(${valores.slice(0, 2)}) ${valores.slice(2, 3)} ${valores.slice(3, 7)}-${valores.slice(7, 11)}`
 			}
 			campo.value = numeros
-		})
-	}
+		}
+	})
 }*/
 adicionar.addEventListener("click", () => {
 	if (selecionar.value) {
