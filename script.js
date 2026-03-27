@@ -1,82 +1,79 @@
+const adicionar = document.querySelector(".adicionar");
 const selecionar = document.querySelector(".selecionar");
-const adicionar = document.querySelector(".adicionar")
 const campos = document.querySelector(".campos");
-function criarCampo() {
-	const campo = document.createElement("div");
-	campo.classList.add("campo")
-	campos.appendChild(campo)
-	if (selecionar.value === "endereco") {
-		const campoTextarea = document.createElement("textarea")
-		campoTextarea.classList.add("form-control")
-		campoTextarea.placeholder = "Endereço"
-		campo.appendChild(campoTextarea)
-		validarCampos(campoTextarea)
-	} else {
-		const campoInput = document.createElement("input")
-		campoInput.classList.add("form-control")
-		if (selecionar.value === "email") {
-			campoInput.placeholder = "Email"
-		} else {
-			campoInput.placeholder = "Celular"
-		}
-		campo.appendChild(campoInput)
-		validarCampos(campoInput)
-		//mascara(campoInput)
-	}
-	botaoRemover(campo)
+function criarCampos() {
+  const campo = document.createElement("div");
+  campo.classList.add("campo");
+  campos.appendChild(campo);
+  let campoEntrada;
+  if (selecionar.value === "endereco") {
+    campoEntrada = document.createElement("textarea");
+    campoEntrada.classList.add("form-control");
+    campoEntrada.placeholder = "Endereço";
+    campo.appendChild(campoEntrada);
+  } else {
+    campoEntrada = document.createElement("input");
+    campoEntrada.classList.add("form-control");
+    if (selecionar.value === "email") {
+      campoEntrada.placeholder = "Email";
+    } else {
+      campoEntrada.placeholder = "Celular";
+      validacaoCelular(campoEntrada);
+    }
+    campo.appendChild(campoEntrada);
+  }
+  criarBotao(campo);
+  validacaoGeral(campoEntrada);
 }
-function botaoRemover(campo) {
-	const remover = document.createElement("button")
-	remover.classList.add("btn", "btn-danger", "remover")
-	remover.textContent = "X"
-	remover.addEventListener("click", () => {
-		campo.remove()
-	})
-	campo.appendChild(remover)
+function criarBotao(campo) {
+  const botao = document.createElement("button");
+  botao.classList.add("btn", "btn-danger", "remover");
+  botao.textContent = "X";
+  campo.appendChild(botao);
+  botao.addEventListener("click", () => {
+    campo.remove();
+  });
 }
-function validarCampos(campo) {
-	campo.addEventListener("input", () => {
-		if (campo.placeholder === "Celular") {
-			campo.value = campo.value.replace(/\D/g, "").slice(0, 11)
-		}
-	})
-	campo.addEventListener("blur", () => {
-		if (campo.value === "") {
-			campo.classList.add("is-invalid")
-		}
-		else {
-			campo.classList.remove("is-invalid")
-		}
-		if (campo.placeholder === "Celular") {
-			if (campo.value.replace(/\D/g, "").slice(0, 11).length < 11) {
-				campo.classList.add("is-invalid")
-			}
-			else {
-				campo.classList.remove("is-invalid")
-			}
-		}
-	})
+function validacaoGeral(campoEntrada) {
+  campoEntrada.addEventListener("blur", () => {
+    if (campoEntrada.placeholder !== "Celular") {
+      if (campoEntrada.value === "") {
+        campoEntrada.classList.add("is-invalid");
+      } else {
+        campoEntrada.classList.remove("is-invalid");
+      }
+    }
+  });
 }
-/*function mascara(campo) {
-	campo.addEventListener("input", () => {
-		if (campo.placeholder === "Celular") {
-			let valores = campo.value
-			let numeros = valores
-			if (valores.length > 0) {
-				numeros = `(${valores.slice(0, 2)}`
-			} if (valores.length > 2) {
-				numeros = `(${valores.slice(0, 2)}) ${valores.slice(2, 3)}`
-			} if (valores.length > 3) {
-				numeros = `(${valores.slice(0, 2)}) ${valores.slice(2, 3)} ${valores.slice(3, 7)}`
-			} if (valores.length > 7) {
-				numeros = `(${valores.slice(0, 2)}) ${valores.slice(2, 3)} ${valores.slice(3, 7)}-${valores.slice(7, 11)}`
-			}
-			campo.value = numeros
-		}
-	})
-}*/
+function validacaoCelular(campoEntrada) {
+  campoEntrada.addEventListener("input", () => {
+    campoEntrada.value = campoEntrada.value.replace(/\D/g, "").slice(0, 11);
+    let valor = campoEntrada.value;
+    let numeros = valor;
+    if (valor.length > 0) {
+      numeros = `(${valor.slice(0, 2)}`;
+    }
+    if (valor.length > 2) {
+      numeros = `(${valor.slice(0, 2)}) ${valor.slice(2, 3)}`;
+    }
+    if (valor.length > 3) {
+      numeros = `(${valor.slice(0, 2)}) ${valor.slice(2, 3)} ${valor.slice(3, 7)}`;
+    }
+    if (valor.length > 7) {
+      numeros = `(${valor.slice(0, 2)}) ${valor.slice(2, 3)} ${valor.slice(3, 7)}-${valor.slice(7, 11)}`;
+    }
+    campoEntrada.value = numeros;
+  });
+  campoEntrada.addEventListener("blur", () => {
+    if (campoEntrada.value.replace(/\D/g, "").length < 11) {
+      campoEntrada.classList.add("is-invalid");
+    } else {
+      campoEntrada.classList.remove("is-invalid");
+    }
+  });
+}
 adicionar.addEventListener("click", () => {
-	if (selecionar.value) {
-		criarCampo()
-	}
-})
+  if (selecionar.value) {
+    criarCampos();
+  }
+});
