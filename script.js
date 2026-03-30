@@ -47,12 +47,10 @@ function validacaoEmail(campoEntrada) {
 }
 function validacaoEndereco(campoEntrada) {
   campoEntrada.addEventListener("blur", () => {
-    if (campoEntrada.placeholder !== "Celular") {
-      if (campoEntrada.value === "") {
-        campoEntrada.classList.add("is-invalid");
-      } else {
-        campoEntrada.classList.remove("is-invalid");
-      }
+    if (campoEntrada.value === "") {
+      campoEntrada.classList.add("is-invalid");
+    } else {
+      campoEntrada.classList.remove("is-invalid");
     }
   });
 }
