@@ -25,6 +25,7 @@ body {
 .remover {
   border-radius: 50%;
   font-weight: bold;
+  align-self: start;
 }
 .campo {
   display: flex;
