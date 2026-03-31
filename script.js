@@ -9,22 +9,18 @@ function criarCampos() {
   wrapper.classList.add("wrapper");
   campo.appendChild(wrapper);
   let campoEntrada;
-  if (selecionar.value === "endereco") {
-    campoEntrada = document.createElement("textarea");
-    campoEntrada.classList.add("form-control");
-    campoEntrada.placeholder = "Endereço";
-    campoEntrada.dataset.tipo = "endereco";
-  } else {
-    campoEntrada = document.createElement("input");
-    campoEntrada.classList.add("form-control");
-    if (selecionar.value === "celular") {
-      campoEntrada.placeholder = "Celular";
-      campoEntrada.dataset.tipo = "celular";
-      validacaoCelular(campoEntrada);
-    } else {
-      campoEntrada.placeholder = "Email";
-      campoEntrada.dataset.tipo = "email";
-    }
+  campoEntrada = document.createElement("input");
+  campoEntrada.classList.add("form-control");
+  if (selecionar.value === "cep") {
+    campoEntrada.placeholder = "CEP";
+    campoEntrada.dataset.tipo = "cep";
+  } else if (selecionar.value === "celular") {
+    campoEntrada.placeholder = "Celular";
+    campoEntrada.dataset.tipo = "celular";
+    validacaoCelular(campoEntrada);
+  } else if (selecionar.value === "email") {
+    campoEntrada.placeholder = "Email";
+    campoEntrada.dataset.tipo = "email";
   }
   wrapper.appendChild(campoEntrada);
   criarBotaoRemover(campo);
@@ -43,9 +39,9 @@ function feedbackErro(campoEntrada, wrapper) {
   const feedback = document.createElement("div");
   feedback.classList.add("invalid-feedback");
   campoEntrada.addEventListener("blur", () => {
-    if (campoEntrada.dataset.tipo === "endereco") {
+    if (campoEntrada.dataset.tipo === "cep") {
       if (campoEntrada.value === "") {
-        feedback.textContent = "O campo endereço não pode estar vazio";
+        feedback.textContent = "O CEP é inválido";
         campoEntrada.classList.add("is-invalid");
         wrapper.appendChild(feedback);
       } else {
