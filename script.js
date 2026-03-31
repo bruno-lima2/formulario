@@ -14,6 +14,7 @@ function criarCampos() {
   if (selecionar.value === "cep") {
     campoEntrada.placeholder = "CEP";
     campoEntrada.dataset.tipo = "cep";
+    validacaoCEP(campoEntrada);
   } else if (selecionar.value === "celular") {
     campoEntrada.placeholder = "Celular";
     campoEntrada.dataset.tipo = "celular";
@@ -40,7 +41,7 @@ function feedbackErro(campoEntrada, wrapper) {
   feedback.classList.add("invalid-feedback");
   campoEntrada.addEventListener("blur", () => {
     if (campoEntrada.dataset.tipo === "cep") {
-      if (campoEntrada.value === "") {
+      if (campoEntrada.value.replace(/\D/g, "").length < 8) {
         feedback.textContent = "O CEP é inválido";
         campoEntrada.classList.add("is-invalid");
         wrapper.appendChild(feedback);
@@ -86,6 +87,16 @@ function validacaoCelular(campoEntrada) {
     }
     if (valor.length > 7) {
       numeros = `(${valor.slice(0, 2)}) ${valor.slice(2, 3)} ${valor.slice(3, 7)}-${valor.slice(7, 11)}`;
+    }
+    campoEntrada.value = numeros;
+  });
+}
+function validacaoCEP(campoEntrada) {
+  campoEntrada.addEventListener("input", () => {
+    let valor = campoEntrada.value.replace(/\D/g, "").slice(0, 8);
+    let numeros = valor;
+    if (valor.length > 5) {
+      numeros = `${(valor.slice(0, 5))}-${valor.slice(5, 8)}`;
     }
     campoEntrada.value = numeros;
   });
