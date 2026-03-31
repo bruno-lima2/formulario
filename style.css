@@ -13,10 +13,6 @@ body {
 .adicionar {
   font-weight: bold;
 }
-.enviar {
-  align-self: end;
-  font-weight: bold;
-}
 .campos {
   display: flex;
   flex-direction: column;
