@@ -13,14 +13,17 @@ function criarCampos() {
     campoEntrada = document.createElement("textarea");
     campoEntrada.classList.add("form-control");
     campoEntrada.placeholder = "Endereço";
+    campoEntrada.dataset.tipo = "endereco";
   } else {
     campoEntrada = document.createElement("input");
     campoEntrada.classList.add("form-control");
     if (selecionar.value === "celular") {
       campoEntrada.placeholder = "Celular";
+      campoEntrada.dataset.tipo = "celular";
       validacaoCelular(campoEntrada);
     } else {
       campoEntrada.placeholder = "Email";
+      campoEntrada.dataset.tipo = "email";
     }
   }
   wrapper.appendChild(campoEntrada);
@@ -40,7 +43,7 @@ function feedbackErro(campoEntrada, wrapper) {
   const feedback = document.createElement("div");
   feedback.classList.add("invalid-feedback");
   campoEntrada.addEventListener("blur", () => {
-    if (campoEntrada.placeholder === "Endereço") {
+    if (campoEntrada.dataset.tipo === "endereco") {
       if (campoEntrada.value === "") {
         feedback.textContent = "O campo endereço não pode estar vazio";
         campoEntrada.classList.add("is-invalid");
@@ -49,7 +52,7 @@ function feedbackErro(campoEntrada, wrapper) {
         feedback.remove();
         campoEntrada.classList.remove("is-invalid");
       }
-    } else if (campoEntrada.placeholder === "Celular") {
+    } else if (campoEntrada.dataset.tipo === "celular") {
       if (campoEntrada.value.replace(/\D/g, "").length < 11) {
         feedback.textContent = "O número de celular é inválido";
         campoEntrada.classList.add("is-invalid");
@@ -58,7 +61,7 @@ function feedbackErro(campoEntrada, wrapper) {
         feedback.remove();
         campoEntrada.classList.remove("is-invalid");
       }
-    } else if (campoEntrada.placeholder === "Email") {
+    } else if (campoEntrada.dataset.tipo === "email") {
       const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!regexEmail.test(campoEntrada.value)) {
         feedback.textContent = "O email é inválido";
