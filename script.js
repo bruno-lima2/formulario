@@ -8,8 +8,7 @@ function criarCampos() {
   const wrapper = document.createElement("div");
   wrapper.classList.add("wrapper");
   campo.appendChild(wrapper);
-  let campoEntrada;
-  campoEntrada = document.createElement("input");
+  let campoEntrada = document.createElement("input");
   campoEntrada.classList.add("form-control");
   if (selecionar.value === "cep") {
     campoEntrada.placeholder = "CEP";
@@ -34,41 +33,6 @@ function criarBotaoRemover(campo) {
   campo.appendChild(remover);
   remover.addEventListener("click", () => {
     campo.remove();
-  });
-}
-function feedbackErro(campoEntrada, wrapper) {
-  const feedback = document.createElement("div");
-  feedback.classList.add("invalid-feedback");
-  campoEntrada.addEventListener("blur", () => {
-    if (campoEntrada.dataset.tipo === "cep") {
-      if (campoEntrada.value.replace(/\D/g, "").length < 8) {
-        feedback.textContent = "O CEP é inválido";
-        campoEntrada.classList.add("is-invalid");
-        wrapper.appendChild(feedback);
-      } else {
-        feedback.remove();
-        campoEntrada.classList.remove("is-invalid");
-      }
-    } else if (campoEntrada.dataset.tipo === "celular") {
-      if (campoEntrada.value.replace(/\D/g, "").length < 11) {
-        feedback.textContent = "O número de celular é inválido";
-        campoEntrada.classList.add("is-invalid");
-        wrapper.appendChild(feedback);
-      } else {
-        feedback.remove();
-        campoEntrada.classList.remove("is-invalid");
-      }
-    } else if (campoEntrada.dataset.tipo === "email") {
-      const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!regexEmail.test(campoEntrada.value)) {
-        feedback.textContent = "O email é inválido";
-        campoEntrada.classList.add("is-invalid");
-        wrapper.appendChild(feedback);
-      } else {
-        feedback.remove();
-        campoEntrada.classList.remove("is-invalid");
-      }
-    }
   });
 }
 function validacaoCelular(campoEntrada) {
@@ -96,7 +60,7 @@ function validacaoCEP(campoEntrada) {
     let valor = campoEntrada.value.replace(/\D/g, "").slice(0, 8);
     let numeros = valor;
     if (valor.length > 5) {
-      numeros = `${(valor.slice(0, 5))}-${valor.slice(5, 8)}`;
+      numeros = `${valor.slice(0, 5)}-${valor.slice(5, 8)}`;
     }
     campoEntrada.value = numeros;
   });
@@ -106,3 +70,46 @@ adicionar.addEventListener("click", () => {
     criarCampos();
   }
 });
+function feedbackErro(campoEntrada, wrapper) {
+  const feedback = document.createElement("div");
+  feedback.classList.add("invalid-feedback");
+  campoEntrada.addEventListener("blur", () => {
+    if (campoEntrada.dataset.tipo === "cep") {
+      if (valor.replace(/\D/g, "").length < 8) {
+        feedback.textContent = "O CEP é inválido";
+        campoEntrada.classList.add("is-invalid");
+        wrapper.appendChild(feedback);
+      } else {
+        campoEntrada.classList.remove("is-invalid");
+        feedback.remove();
+      }
+    } else if (campoEntrada.dataset.tipo === "celular") {
+      if (valor.replace(/\D/g, "").length < 11) {
+        feedback.textContent = "O número de celular é inválido";
+        campoEntrada.classList.add("is-invalid");
+        wrapper.appendChild(feedback);
+      } else {
+        campoEntrada.classList.remove("is-invalid");
+        feedback.remove();
+      }
+    } else if (campoEntrada.dataset.tipo === "email") {
+      const valor = campoEntrada.value;
+      const dominio = valor.split("@")[1];
+      const regexEmailAvancado = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const dominiosValidos = ["gmail.com", "hotmail.com", "yahoo.com", "outlook.com",
+      ];
+      if (!regexEmailAvancado.test(valor)) {
+        feedback.textContent = "O email é inválido";
+        campoEntrada.classList.add("is-invalid");
+        wrapper.appendChild(feedback);
+      } else if (!dominiosValidos.includes(dominio)) {
+        feedback.textContent = "O domínio do email não é válido";
+        campoEntrada.classList.add("is-invalid");
+        wrapper.appendChild(feedback);
+      } else {
+        campoEntrada.classList.remove("is-invalid");
+        feedback.remove();
+      }
+    }
+  });
+}
