@@ -10,35 +10,61 @@ function criarCampos() {
   campo.appendChild(wrapper);
   let campoEntrada = document.createElement("input");
   campoEntrada.classList.add("form-control");
-  if (selecionar.value === "cep") {
-    campoEntrada.placeholder = "CEP";
-    campoEntrada.dataset.tipo = "cep";
-    validacaoCEP(campoEntrada);
+  if (selecionar.value === "email") {
+    campoEntrada.placeholder = "Email";
+    wrapper.appendChild(campoEntrada);
+    botaoRemover(campo);
+    feedbackEmail(campoEntrada, wrapper);
   } else if (selecionar.value === "celular") {
     campoEntrada.placeholder = "Celular";
-    campoEntrada.dataset.tipo = "celular";
+    wrapper.appendChild(campoEntrada);
+    botaoRemover(campo);
     validacaoCelular(campoEntrada);
-  } else if (selecionar.value === "email") {
-    campoEntrada.placeholder = "Email";
-    campoEntrada.dataset.tipo = "email";
+    feedbackCelular(campoEntrada, wrapper);
+  } else if (selecionar.value === "cep") {
+    campoEntrada.placeholder = "CEP";
+    wrapper.appendChild(campoEntrada);
+    botaoRemover(campo);
+    validacaoCEP(campoEntrada);
+    feedbackCEP(campoEntrada, wrapper);
   }
-  wrapper.appendChild(campoEntrada);
-  criarBotaoRemover(campo);
-  feedbackErro(campoEntrada, wrapper);
 }
-function criarBotaoRemover(campo) {
+function botaoRemover(campo) {
   const remover = document.createElement("button");
-  remover.classList.add("btn", "btn-danger", "remover");
   remover.textContent = "X";
-  campo.appendChild(remover);
+  remover.classList.add("btn", "btn-danger", "remover");
   remover.addEventListener("click", () => {
     campo.remove();
+  });
+  campo.appendChild(remover);
+}
+function validacaoCEP(campoEntrada) {
+  campoEntrada.addEventListener("input", () => {
+    let valor = campoEntrada.value.replace(/\D/g, "").slice(0, 8);
+    let numeros = valor;
+    if (valor.length > 5) {
+      numeros = `${valor.slice(0, 5)}-${valor.slice(5, 8)}`;
+    }
+    campoEntrada.value = numeros;
+  });
+}
+function feedbackCEP(campoEntrada, wrapper) {
+  const feedback = document.createElement("div");
+  feedback.textContent = "O CEP é inválido";
+  feedback.classList.add("invalid-feedback", "feedback");
+  campoEntrada.addEventListener("blur", () => {
+    if (campoEntrada.value.replace(/\D/g, "").slice(0, 8).length < 8) {
+      campoEntrada.classList.add("is-invalid");
+      wrapper.appendChild(feedback);
+    } else {
+      campoEntrada.classList.remove("is-invalid");
+      feedback.remove();
+    }
   });
 }
 function validacaoCelular(campoEntrada) {
   campoEntrada.addEventListener("input", () => {
-    campoEntrada.value = campoEntrada.value.replace(/\D/g, "").slice(0, 11);
-    let valor = campoEntrada.value;
+    let valor = campoEntrada.value.replace(/\D/g, "").slice(0, 11);
     let numeros = valor;
     if (valor.length > 0) {
       numeros = `(${valor.slice(0, 2)}`;
@@ -55,14 +81,33 @@ function validacaoCelular(campoEntrada) {
     campoEntrada.value = numeros;
   });
 }
-function validacaoCEP(campoEntrada) {
-  campoEntrada.addEventListener("input", () => {
-    let valor = campoEntrada.value.replace(/\D/g, "").slice(0, 8);
-    let numeros = valor;
-    if (valor.length > 5) {
-      numeros = `${valor.slice(0, 5)}-${valor.slice(5, 8)}`;
+function feedbackCelular(campoEntrada, wrapper) {
+  const feedback = document.createElement("div");
+  feedback.textContent = "O número de celular é inválido";
+  feedback.classList.add("invalid-feedback", "feedback");
+  campoEntrada.addEventListener("blur", () => {
+    if (campoEntrada.value.replace(/\D/g, "").slice(0, 11).length < 11) {
+      campoEntrada.classList.add("is-invalid");
+      wrapper.appendChild(feedback);
+    } else {
+      campoEntrada.classList.remove("is-invalid");
+      feedback.remove();
     }
-    campoEntrada.value = numeros;
+  });
+}
+function feedbackEmail(campoEntrada, wrapper) {
+  const feedback = document.createElement("div");
+  feedback.textContent = "O email é inválido";
+  feedback.classList.add("invalid-feedback", "feedback");
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  campoEntrada.addEventListener("blur", () => {
+    if (!regexEmail.test(campoEntrada.value)) {
+      campoEntrada.classList.add("is-invalid");
+      wrapper.appendChild(feedback);
+    } else {
+      campoEntrada.classList.remove("is-invalid");
+      feedback.remove();
+    }
   });
 }
 adicionar.addEventListener("click", () => {
@@ -70,46 +115,3 @@ adicionar.addEventListener("click", () => {
     criarCampos();
   }
 });
-function feedbackErro(campoEntrada, wrapper) {
-  const feedback = document.createElement("div");
-  feedback.classList.add("invalid-feedback");
-  campoEntrada.addEventListener("blur", () => {
-    if (campoEntrada.dataset.tipo === "cep") {
-      if (valor.replace(/\D/g, "").length < 8) {
-        feedback.textContent = "O CEP é inválido";
-        campoEntrada.classList.add("is-invalid");
-        wrapper.appendChild(feedback);
-      } else {
-        campoEntrada.classList.remove("is-invalid");
-        feedback.remove();
-      }
-    } else if (campoEntrada.dataset.tipo === "celular") {
-      if (valor.replace(/\D/g, "").length < 11) {
-        feedback.textContent = "O número de celular é inválido";
-        campoEntrada.classList.add("is-invalid");
-        wrapper.appendChild(feedback);
-      } else {
-        campoEntrada.classList.remove("is-invalid");
-        feedback.remove();
-      }
-    } else if (campoEntrada.dataset.tipo === "email") {
-      const valor = campoEntrada.value;
-      const dominio = valor.split("@")[1];
-      const regexEmailAvancado = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      const dominiosValidos = ["gmail.com", "hotmail.com", "yahoo.com", "outlook.com",
-      ];
-      if (!regexEmailAvancado.test(valor)) {
-        feedback.textContent = "O email é inválido";
-        campoEntrada.classList.add("is-invalid");
-        wrapper.appendChild(feedback);
-      } else if (!dominiosValidos.includes(dominio)) {
-        feedback.textContent = "O domínio do email não é válido";
-        campoEntrada.classList.add("is-invalid");
-        wrapper.appendChild(feedback);
-      } else {
-        campoEntrada.classList.remove("is-invalid");
-        feedback.remove();
-      }
-    }
-  });
-}
