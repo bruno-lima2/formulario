@@ -5,38 +5,43 @@ function criarCampos() {
   const campo = document.createElement("div");
   campo.classList.add("campo");
   campos.appendChild(campo);
-  const wrapper = document.createElement("div");
-  wrapper.classList.add("wrapper");
-  campo.appendChild(wrapper);
+  let label = document.createElement("label");
+  const container = document.createElement("div");
+  container.classList.add("container");
+  campo.appendChild(label);
+  campo.appendChild(container);
   let campoEntrada = document.createElement("input");
   campoEntrada.classList.add("form-control");
   if (selecionar.value === "email") {
-    campoEntrada.placeholder = "Email";
-    wrapper.appendChild(campoEntrada);
-    botaoRemover(campo);
-    feedbackEmail(campoEntrada, wrapper);
+    label.textContent = "Email";
+    campoEntrada.placeholder = "exemplo@dominio.com";
+    container.appendChild(campoEntrada);
+    botaoRemover(container, campo);
+    feedbackEmail(campoEntrada, campo);
   } else if (selecionar.value === "celular") {
-    campoEntrada.placeholder = "Celular";
-    wrapper.appendChild(campoEntrada);
-    botaoRemover(campo);
+    label.textContent = "Celular";
+    campoEntrada.placeholder = "(00) 0 0000-0000";
+    container.appendChild(campoEntrada);
+    botaoRemover(container, campo);
     validacaoCelular(campoEntrada);
-    feedbackCelular(campoEntrada, wrapper);
+    feedbackCelular(campoEntrada, campo);
   } else if (selecionar.value === "cep") {
-    campoEntrada.placeholder = "CEP";
-    wrapper.appendChild(campoEntrada);
-    botaoRemover(campo);
+    label.textContent = "CEP";
+    campoEntrada.placeholder = "00000-000";
+    container.appendChild(campoEntrada);
+    botaoRemover(container, campo);
     validacaoCEP(campoEntrada);
-    feedbackCEP(campoEntrada, wrapper);
+    feedbackCEP(campoEntrada, campo);
   }
 }
-function botaoRemover(campo) {
+function botaoRemover(container, campo) {
   const remover = document.createElement("button");
   remover.textContent = "X";
   remover.classList.add("btn", "btn-danger", "remover");
   remover.addEventListener("click", () => {
     campo.remove();
   });
-  campo.appendChild(remover);
+  container.appendChild(remover);
 }
 function validacaoCEP(campoEntrada) {
   campoEntrada.addEventListener("input", () => {
@@ -48,14 +53,14 @@ function validacaoCEP(campoEntrada) {
     campoEntrada.value = numeros;
   });
 }
-function feedbackCEP(campoEntrada, wrapper) {
+function feedbackCEP(campoEntrada, campo) {
   const feedback = document.createElement("div");
   feedback.textContent = "O CEP é inválido";
   feedback.classList.add("invalid-feedback", "feedback");
   campoEntrada.addEventListener("blur", () => {
     if (campoEntrada.value.replace(/\D/g, "").slice(0, 8).length < 8) {
       campoEntrada.classList.add("is-invalid");
-      wrapper.appendChild(feedback);
+      campo.appendChild(feedback);
     } else {
       campoEntrada.classList.remove("is-invalid");
       feedback.remove();
@@ -81,21 +86,21 @@ function validacaoCelular(campoEntrada) {
     campoEntrada.value = numeros;
   });
 }
-function feedbackCelular(campoEntrada, wrapper) {
+function feedbackCelular(campoEntrada, container) {
   const feedback = document.createElement("div");
   feedback.textContent = "O número de celular é inválido";
   feedback.classList.add("invalid-feedback", "feedback");
   campoEntrada.addEventListener("blur", () => {
     if (campoEntrada.value.replace(/\D/g, "").slice(0, 11).length < 11) {
       campoEntrada.classList.add("is-invalid");
-      wrapper.appendChild(feedback);
+      container.appendChild(feedback);
     } else {
       campoEntrada.classList.remove("is-invalid");
       feedback.remove();
     }
   });
 }
-function feedbackEmail(campoEntrada, wrapper) {
+function feedbackEmail(campoEntrada, container) {
   const feedback = document.createElement("div");
   feedback.textContent = "O email é inválido";
   feedback.classList.add("invalid-feedback", "feedback");
@@ -103,7 +108,7 @@ function feedbackEmail(campoEntrada, wrapper) {
   campoEntrada.addEventListener("blur", () => {
     if (!regexEmail.test(campoEntrada.value)) {
       campoEntrada.classList.add("is-invalid");
-      wrapper.appendChild(feedback);
+      container.appendChild(feedback);
     } else {
       campoEntrada.classList.remove("is-invalid");
       feedback.remove();
