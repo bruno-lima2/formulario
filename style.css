@@ -13,6 +13,9 @@ body {
 .adicionar {
   font-weight: bold;
 }
+.feedback {
+  display: flex;
+}
 .campos {
   display: flex;
   flex-direction: column;
@@ -23,10 +26,10 @@ body {
   gap: 1rem;
   padding: 0;
 }
-.feedback {
-  display: flex;
-}
 .remover {
-  font-weight: bold;
   border-radius: 50%;
+  font-weight: bold;
+}
+.label {
+  margin-bottom: 0.25rem;
 }
